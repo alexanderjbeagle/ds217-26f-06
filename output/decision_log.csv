@@ -1,0 +1,10 @@
+table,issue,decision,reason
+patients,exact duplicate rows,"Removed exact duplicate rows using drop_duplicates, keeping the first occurrence.",Identical rows are not possible.
+patients,gender spellings that are not a code,"Stripped, lowercased, mapped known non-standard text to unified codes, and set unmatched entries to missing.",Correcting categorial gender information.
+patients,site codes needing normalization,Converted strings to uppercase and stripped out all stray hyphens and spaces.,Text fields typed by hand require rigorous format cleaning to support precise joining operations later.
+patients,birth_year sentinel 9999,Coerced strings to numbers and replaced the 9999 to missing.,Placeholders can distort data if numeric.
+visits,weight column named wt_kg in visits_south.csv,Renamed wt_kg to weight_kg in the south dataframe prior to stacking datasets.,TO have identical column names for stacking.
+visits,sbp sentinel 999 and readings outside 70 through 250,"Coerced to numbers, converted 999 and out-of-range values to missing.",Removing outliers and avoiding sentinels causing data skew.
+visits,impossible and loosely written visit dates,Enforced strict YYYY-MM-DD format verification.,Enforcing calendar rules to correct unparsable dates.
+visits,repeated patient_id and visit pairs,Sorted the records chronologically by encounter time and preserved the msot recent bp check.,"Latest checks more reliable, need one per paitnet-visit."
+sites,repeated site_code rows,Filtered and renamed to current names only.,SIngle site names to prevent join errors.
